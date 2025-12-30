@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Load saved theme
-    const savedTheme = localStorage.getItem('theme') || 'light';
+    const savedTheme = localStorage.getItem('theme') || 'dark';
     applyTheme(savedTheme);
 
 
