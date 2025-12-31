@@ -2,7 +2,7 @@
 :root {
     /* Dark Theme (Default) */
     --bg-color-dark: #000000;
-    --text-primary-dark: #f5f5dc; /* Creme */
+    --text-primary-dark: #ffffff; /* Creme */
     --accent-color-dark: #0aff0a; /* Green */
     --secondary-accent-dark: #f5f5dc; /* Creme used as secondary accent/text */
     --card-bg-dark: #111111;
@@ -29,6 +29,7 @@ body {
     padding: 0;
     transition: background-color 0.3s, color 0.3s;
     line-height: 1.6;
+    overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
 /* Theme Application */
@@ -102,11 +103,27 @@ nav a:hover {
     text-decoration: underline;
 }
 
+/* Hamburger Menu */
+.hamburger {
+    display: none;
+    cursor: pointer;
+}
+
+.bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    transition: all 0.3s ease-in-out;
+    background-color: var(--current-accent);
+}
+
 /* Theme Switcher */
 .theme-switcher {
     position: relative;
     display: flex;
     align-items: center;
+    margin-left: 1rem;
 }
 
 #theme-toggle {
@@ -233,12 +250,6 @@ body.dark-theme .btn:hover {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 4rem;
-}
-
-@media (max-width: 768px) {
-    .about-container {
-        grid-template-columns: 1fr;
-    }
 }
 
 .skills-container {
@@ -377,16 +388,19 @@ body.light-theme .project-card a:hover {
 /* Contact Section */
 .social-links {
     margin-top: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
 }
 
 .social-links a {
-    margin: 0 1.5rem;
     text-decoration: none;
     font-size: 1.2rem;
     color: inherit;
     border: 1px solid var(--current-border);
     padding: 10px 20px;
     transition: all 0.3s;
+    display: inline-block; /* Ensure padding works correctly and doesn't overlap */
 }
 
 .social-links a:hover {
@@ -407,4 +421,83 @@ footer {
     border-top: 1px solid var(--current-border);
     margin-top: 4rem;
     opacity: 0.6;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    /* Header & Navigation */
+    .logo {
+        margin-right: auto;
+    }
+
+    .hamburger {
+        display: block;
+    }
+
+    .hamburger.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+    .hamburger.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+    .hamburger.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+    nav ul {
+        position: fixed;
+        left: -100%;
+        top: 60px; /* Below header */
+        gap: 0;
+        flex-direction: column;
+        background-color: var(--current-card-bg);
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+        border-bottom: 1px solid var(--current-border);
+        padding: 2rem 0;
+        box-shadow: 0 10px 10px rgba(0,0,0,0.5);
+    }
+
+    nav ul.active {
+        left: 0;
+    }
+
+    nav ul li {
+        margin: 16px 0;
+    }
+    
+    /* Typography adjustments */
+    h1 {
+        font-size: 2.5rem; /* Smaller font size for mobile */
+    }
+
+    h2 {
+        font-size: 1.8rem;
+    }
+
+    /* Layout adjustments */
+    .about-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .linkedin-style-container {
+        flex-direction: column;
+    }
+
+    .social-links {
+        justify-content: flex-start; /* Or center, depending on preference. Left align matches content. */
+    }
+    
+    .social-links a {
+        width: 100%; /* Full width buttons on very small screens? Or just wrap */
+        text-align: center;
+        box-sizing: border-box;
+    }
+    
+    /* Ensure padding for mobile view */
+    section {
+        padding: 3rem 0;
+    }
 }
