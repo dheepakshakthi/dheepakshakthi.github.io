@@ -33,8 +33,9 @@ document.addEventListener('DOMContentLoaded', () => {
         'DevO',
         'Biopsy_and_Abnormality_reporting_system_in_Endoscopy',
         'ReWear',
-        'smart_city_communication_hub',
-        'Ai-Chatbot-with-image-processing-features'
+        'SIH-FRA',
+        '168',
+        'Custom_LLM'
     ];
 
     fetch(`https://api.github.com/users/${username}/repos`)
@@ -68,6 +69,20 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Error fetching GitHub projects:', error);
             projectContainer.innerHTML = '<p>Could not load projects. Please try again later.</p>';
         });
+
+    // Mobile Menu Toggle
+    const hamburger = document.querySelector('.hamburger');
+    const navMenu = document.querySelector('nav ul');
+
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        navMenu.classList.toggle('active');
+    });
+
+    document.querySelectorAll('nav a').forEach(n => n.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        navMenu.classList.remove('active');
+    }));
 
     // Smooth scrolling for navigation links
     document.querySelectorAll('nav a').forEach(anchor => {
