@@ -31,11 +31,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const username = 'dheepakshakthi';
     const featuredProjects = [
         'DevO',
-        'Biopsy_and_Abnormality_reporting_system_in_Endoscopy',
-        'ReWear',
-        'SIH-FRA',
-        '168',
-        'Custom_LLM'
+        'AutoCAD-Validation-Agent-Plugin',
+        'fixbridge',
+        'CareLink',
+        '168_rag_chatbot',
+        'SCM-Based-Segmentation-Model'
     ];
 
     fetch(`https://api.github.com/users/${username}/repos`)
@@ -46,19 +46,30 @@ document.addEventListener('DOMContentLoaded', () => {
             return response.json();
         })
         .then(repos => {
-            const filteredRepos = repos.filter(repo => featuredProjects.includes(repo.name));
+            // Map repos by name for fast lookup
+            const repoMap = {};
+            repos.forEach(repo => { repoMap[repo.name] = repo; });
 
-            if (filteredRepos.length === 0) {
+            // Render in the order defined by featuredProjects
+            const toRender = featuredProjects
+                .map(name => repoMap[name])
+                .filter(Boolean);
+
+            if (toRender.length === 0) {
                 projectContainer.innerHTML = '<p>No public projects found.</p>';
                 return;
             }
 
-            filteredRepos.forEach(repo => {
+            toRender.forEach(repo => {
                 const projectCard = document.createElement('div');
                 projectCard.classList.add('project-card');
 
+                const displayName = repo.name
+                    .replace(/_/g, ' ')
+                    .replace(/-/g, ' ');
+
                 projectCard.innerHTML = `
-                    <h3>${repo.name.replace(/_/g, ' ').replace(/-/g, ' ')}</h3>
+                    <h3>${displayName}</h3>
                     <p>${repo.description || 'No description available.'}</p>
                     <a href="${repo.html_url}" target="_blank">View on GitHub</a>
                 `;

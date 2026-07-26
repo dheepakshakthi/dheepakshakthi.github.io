@@ -199,8 +199,31 @@ h2::before {
 }
 
 /* Home Section */
+.home-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 3rem;
+    width: 100%;
+}
+
 .home-content {
     text-align: left;
+    flex: 1;
+}
+
+.home-photo {
+    flex-shrink: 0;
+}
+
+.profile-pic {
+    width: 320px;
+    height: 320px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid var(--current-accent);
+    box-shadow: 0 0 30px var(--current-accent), 0 0 60px rgba(10, 255, 10, 0.15);
+    display: block;
 }
 
 .greeting {
@@ -476,6 +499,22 @@ footer {
         font-size: 1.8rem;
     }
 
+    /* Home section mobile */
+    .home-wrapper {
+        flex-direction: column-reverse;
+        align-items: center;
+        text-align: center;
+    }
+
+    .home-content {
+        text-align: center;
+    }
+
+    .profile-pic {
+        width: 220px;
+        height: 220px;
+    }
+
     /* Layout adjustments */
     .about-container {
         grid-template-columns: 1fr;
@@ -500,4 +539,64 @@ footer {
     section {
         padding: 3rem 0;
     }
+}
+
+/* Achievements Section */
+.achievements-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.achievements-list li {
+    padding: 1.25rem 1.5rem;
+    border: 1px solid var(--current-border);
+    border-left: 4px solid var(--current-accent);
+    background-color: var(--current-card-bg);
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    transition: transform 0.2s;
+    margin-bottom: 1rem;
+}
+
+.achievements-list li:hover {
+    transform: translateX(10px);
+}
+
+.achievements-list li::before {
+    content: '★';
+    color: var(--current-accent);
+    font-size: 1.1rem;
+    margin-top: 0.1rem;
+    flex-shrink: 0;
+}
+
+.achievements-list li div {
+    line-height: 1.7;
+}
+
+.achievements-list li strong {
+    display: block;
+    margin-bottom: 0.2rem;
+}
+
+/* Publication DOI links */
+.pub-link {
+    display: inline-block;
+    margin-top: 0.4rem;
+    font-size: 0.82rem;
+    color: var(--current-accent);
+    text-decoration: none;
+    border-bottom: 1px dashed var(--current-accent);
+    opacity: 0.85;
+    word-break: break-all;
+}
+
+.pub-link:hover {
+    opacity: 1;
+    border-bottom-style: solid;
 }
